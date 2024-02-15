@@ -1,6 +1,7 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include<HardwareSerial.h>
+#include <WiFiManager.h> 
 HardwareSerial SerialPort(2);
 
 // WiFi settings
@@ -21,18 +22,32 @@ PubSubClient client(espClient);
 
 // Function to connect to WiFi and MQTT
 void connectToWiFiAndMQTT() {
-  // Connect to WiFi
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
+  WiFiManager wifiManager;
+
+  // Try to connect using the predefined credentials
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("WiFi not connected. Starting WiFi Manager.");
+
+
+    // Start WiFi Manager configuration portal
+    if (!wifiManager.autoConnect("BHMS")) {
+      Serial.println("Failed to connect and hit timeout. Resetting and try again.");
+      ESP.restart();
+      delay(1000);
+    }
+
+
+    Serial.println("Connected to WiFi");
+  } else {
+    Serial.println("Already connected to WiFi");
   }
-  Serial.println("Connected to WiFi");
 
   // Connect to ThingsBoard MQTT
-  client.setServer(tbServer, tbPort); 
+  client.setServer(tbServer, tbPort);
 }
 
+
+int Buffer;
 
 void setup() {
   Serial.begin(115200);
