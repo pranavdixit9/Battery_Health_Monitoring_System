@@ -6,12 +6,12 @@
 uint8_t newMACAddress[] = {0xf4, 0x96, 0x34, 0x9d, 0xe5, 0xd1};
 
 // WiFi credentials
-const char *ssid = "acts";
-const char *password = "";
+const char *ssid = "Beauto12";
+const char *password = "Beauto123";
 
 // ThingsBoard MQTT configuration
-const char *mqttServer = "demo.thingsboard.io";  // ThingsBoard MQTT broker address
-const char *token = "kehq7u9qdm9141hfqr79";
+const char *mqttServer = "mqtt.thingsboard.cloud";  // ThingsBoard MQTT broker address
+const char *token = "gojqfm2mnqvaj7yiy3ds";
 
 // Initialize WiFi and MQTT client
 WiFiClient espClient;
@@ -32,7 +32,7 @@ void loop() {
         // Reconnect to ThingsBoard MQTT broker if disconnected
         reconnect();
     }
-  int receivedValues[2];
+  int receivedValues[7];
   if (Serial.available() >= 6) { // Assuming each integer is sent as 2 bytes (16 bits)
     for (int i = 0; i < 2; i++) {
       receivedValues[i] = Serial.read() << 8 | Serial.read();
