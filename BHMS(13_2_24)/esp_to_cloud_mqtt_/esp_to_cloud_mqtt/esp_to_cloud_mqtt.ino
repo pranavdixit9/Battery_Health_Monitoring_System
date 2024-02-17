@@ -61,9 +61,9 @@ void loop() {
    if (!client.connected()) {
         reConnect();
     }
-  int receivedData[4];
+  int receivedData[5];
   
-    if (SerialPort.available() >= 17) { // Ensure enough data is available
+    if (SerialPort.available() >= 21) { // Ensure enough data is available
     String tempData = SerialPort.readStringUntil('#');
     tempData.trim(); // Remove leading/trailing whitespace
 
@@ -74,7 +74,7 @@ void loop() {
     char* token = strtok_r(buffer, ",", &next_token); // Get first token
     int i = 0;
 
-    while (token != NULL && i < 4) {
+    while (token != NULL && i < 5) {
       receivedData[i] = atoi(token); // Convert token to integer
       token = strtok_r(NULL, ",", &next_token); // Get next token
       i++;
@@ -84,12 +84,15 @@ void loop() {
     Serial.println(receivedData[1]);
     Serial.println(receivedData[2]);
     Serial.println(receivedData[3]);
+    Serial.println(receivedData[4]);
   
 
   sendToTB("data1", String(receivedData[0]));
   sendToTB("data2", String(receivedData[1]));
   sendToTB("data3", String(receivedData[2]));
   sendToTB("data4", String(receivedData[3]));
+  sendToTB("data5", String(receivedData[4]));
+  
   
   }
   // Wait for a few seconds before sending the next reading
