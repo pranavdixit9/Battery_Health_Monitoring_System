@@ -60,8 +60,8 @@ all: main-build
 main-build: bp_send.elf secondary-outputs
 
 # Tool invocations
-bp_send.elf bp_send.map: $(OBJS) $(USER_OBJS) C:\Users\dpran\STM32CubeIDE\workspace_1.14.1\bp_send\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "bp_send.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\dpran\STM32CubeIDE\workspace_1.14.1\bp_send\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bp_send.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+bp_send.elf bp_send.map: $(OBJS) $(USER_OBJS) C:\Users\prana\OneDrive\Documents\GitHub\CDAC_Project_group_6\BHMS(13_2_24)\STM_pill_to_main_STM\bp_send\bp_send\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "bp_send.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\prana\OneDrive\Documents\GitHub\CDAC_Project_group_6\BHMS(13_2_24)\STM_pill_to_main_STM\bp_send\bp_send\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bp_send.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
